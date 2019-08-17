@@ -15,22 +15,18 @@ import { RouterModule} from '@angular/router'
 import { ProductModule } from './products/product.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
-    RouterModule.forRoot([
-      {path:'welcome',component:WelcomeComponent},
-      {path:'', redirectTo:'welcome',pathMatch:'full'},
-      {path:'',component:PageNotFoundComponent}
-
-     
-    ]),
     ProductModule,
     UserModule,
-    MessageModule
+    MessageModule,
+    AppRoutingModule
+   
   ],
   declarations: [
     AppComponent,

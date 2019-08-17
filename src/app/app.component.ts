@@ -28,6 +28,7 @@ export class AppComponent {
   logOut(): void {
     this.authService.logout();
     console.log('Log out');
-    this.router.navigate(['/welcome'])
+    //this.router.navigate(['/welcome']); //8th video
+    this.router.navigateByUrl('/welcome');
   }
 }
