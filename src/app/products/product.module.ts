@@ -11,7 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     SharedModule,
     RouterModule.forChild([ //7th video
-      {path:'products', component: ProductListComponent}
+      {path:'products', component: ProductListComponent},
+      {path:'products/:id',component:ProductDetailComponent}
     ])  
   ],
   declarations: [

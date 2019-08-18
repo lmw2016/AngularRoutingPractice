@@ -47,7 +47,7 @@
                    [style.margin.px]="imageMargin">
             </td>
             <td>
-              <a>
+              <a [routerLink]="['/products',product.id]"> 
                 {{ product.productName }}
               </a>
             </td>
