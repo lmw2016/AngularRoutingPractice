@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Product } from './product';
+import { Product, ProductListResolved } from './product';
 import { ProductService } from './product.service';
 import { ActivatedRoute } from '@angular/router';
+import { ProductListResolver } from './product-list-resolver.service';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './product-list.component.html',
@@ -25,7 +27,8 @@ export class ProductListComponent implements OnInit {
   }
 
   filteredProducts: Product[] = [];
-  products: Product[] = [];
+  products:  Product[] = [];
+  
 
   constructor(private productService: ProductService,
         private route: ActivatedRoute) { }
@@ -34,14 +37,27 @@ export class ProductListComponent implements OnInit {
     this.listFilter=this.route.snapshot.queryParamMap.get('filterBy')||''
     this.showImage=this.route.snapshot.queryParamMap.get('showImage')==='true';
 
-    this.productService.getProducts().subscribe(
-      products => {
-        this.products = products;
-        this.filteredProducts = this.performFilter(this.listFilter);
-      },
-      error => this.errorMessage = <any>error
-    );
-   
+  //  this.productService.getProducts().subscribe(
+  //    products => {
+  //      this.products = products;
+  //      this.filteredProducts = this.performFilter(this.listFilter);
+  //    },
+  //    error => this.errorMessage = <any>error
+  //  );
+      
+  //use productlist resolver by observal
+    //  this.route.data.subscribe(data=>{
+    //    const resolvedData: ProductListResolved=data['resolvedData'];
+    //    this.products=resolvedData.products;
+    //    this.errorMessage=resolvedData.error1;
+    //    this.filteredProducts=this.performFilter(this.listFilter);
+    //  });
+
+    //use productlist resolver by snapshot
+    const resolvedData: ProductListResolved=this.route.snapshot.data['resolvedData'];
+    this.products=resolvedData.products;
+    this.errorMessage=resolvedData.error1;
+    this.filteredProducts=this.performFilter(this.listFilter);
   }
 
   performFilter(filterBy: string): Product[] {
