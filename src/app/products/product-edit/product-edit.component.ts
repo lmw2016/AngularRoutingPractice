@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductEditComponent implements OnInit {
   pageTitle = 'Product Edit';
   errorMessage: string;
+  private dataIsValid:{[key:string]:boolean}={};
 
   product: Product;
 
@@ -82,7 +83,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   saveProduct(): void {
-    if (true === true) {
+    if (/*true === true*/this.isValid()) {
       if (this.product.id === 0) {
         this.productService.createProduct(this.product)
           .subscribe(
@@ -108,5 +109,30 @@ export class ProductEditComponent implements OnInit {
 
     // Navigate back to the product list
     this.router.navigate(['/products']);
+  }
+
+  validate():void{
+    this.dataIsValid={};
+    if(this.product.productName&&this.product.productName.length>=3
+      &&this.product.productCode){
+        this.dataIsValid['info']=true;
+      }else{
+        this.dataIsValid['info']=false;
+      }
+
+      if(this.product.category&&this.product.category.length>=3){
+        this.dataIsValid['tags']=true;
+      }else{
+        this.dataIsValid['tags']=false;
+      }
+  }
+
+  isValid(path?:string):boolean{
+    this.validate();
+    if(path){
+      return this.dataIsValid[path]
+    }
+
+    return (this.dataIsValid&&Object.keys(this.dataIsValid).every(d=>this.dataIsValid[d]===true));
   }
 }
