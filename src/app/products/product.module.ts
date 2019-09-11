@@ -15,21 +15,29 @@ import { ProductEditTagsComponent } from './product-edit/product-edit-tags.compo
   imports: [
     SharedModule,
     RouterModule.forChild([ //7th video
-      {path:'products', 
-       component: ProductListComponent,
-       resolve:{resolvedData:ProductListResolver}},
-      {path:'products/:id',
-        component:ProductDetailComponent,
-        resolve:{resolvedData:ProductResolver}},  //with this change the resloved already worked
-      {path:'products/:id/edit',
-      component:ProductEditComponent,
-        resolve:{resolvedData:ProductResolver},
+      {
+        path:'products',
+        /*component:ProductListComponent,
+        resolve:{resolvedData:ProductListResolver},*/
         children:[
-          {path:'',redirectTo:'info',pathMatch:'full'},
-          {path:'info',component:ProductEditInfoComponent},
-          {path:'tags',component:ProductEditTagsComponent}
+          {path:'', 
+           component:ProductListComponent,
+           resolve:{resolvedData:ProductListResolver}},
+          {path:':id',
+           component:ProductDetailComponent,
+           resolve:{resolvedData:ProductResolver}},  //with this change the resloved already worked
+          {path:':id/edit',
+           component:ProductEditComponent,
+           resolve:{resolvedData:ProductResolver},
+           children:[
+             {path:'',redirectTo:'info',pathMatch:'full'},
+             {path:'info',component:ProductEditInfoComponent},
+             {path:'tags',component:ProductEditTagsComponent}
+           ]
+         }
         ]
       }
+      
     ])  
   ],
   declarations: [
