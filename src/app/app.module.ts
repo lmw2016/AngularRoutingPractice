@@ -23,7 +23,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
   imports: [
     BrowserModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
+    InMemoryWebApiModule.forRoot(ProductData, { delay: 1200 }),
     ProductModule,
     UserModule,
     MessageModule,

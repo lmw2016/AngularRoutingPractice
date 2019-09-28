@@ -11,7 +11,7 @@ import { PageNotFoundComponent } from "./page-not-found.component";
             {path:'', redirectTo:'welcome',pathMatch:'full'},
             {path:'**',component:PageNotFoundComponent}
               //8th video : explicitly declard module are processed lastly!!
-          ]) // no , here
+          ],{enableTracing:true}) // no , here
     ],
     exports:[
         RouterModule
