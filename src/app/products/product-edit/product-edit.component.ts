@@ -15,7 +15,21 @@ export class ProductEditComponent implements OnInit {
   errorMessage: string;
   private dataIsValid:{[key:string]:boolean}={};
 
-  product: Product;
+  //product: Product;
+  private currentProduct:Product;
+  private originProduct:Product;
+
+  get product():Product{
+     return this.currentProduct;
+  }
+  set product(value:Product){
+    this.currentProduct=value;
+    this.originProduct={...value}; //clone
+  }
+
+  get isDirty():boolean{
+    return JSON.stringify(this.originProduct)!==JSON.stringify(this.currentProduct);
+  }
 
   constructor(private productService: ProductService,
               private messageService: MessageService,private route: ActivatedRoute,private router:Router) { }
@@ -102,11 +116,18 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
+  reSet():void{
+    this.dataIsValid=null;
+    this.currentProduct=null;
+    this.originProduct=null;
+ }
+
   onSaveComplete(message?: string): void {
     if (message) {
       this.messageService.addMessage(message);
     }
-
+  
+    this.reSet();//avoid confirm for save
     // Navigate back to the product list
     this.router.navigate(['/products']);
   }
