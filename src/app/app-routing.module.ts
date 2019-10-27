@@ -17,6 +17,12 @@ import { AuthService } from "./user/auth.service";
                 //canLoad:[AuthGuard], 
                 loadChildren:"./products/product.module#ProductModule"
             },
+            {
+                path:'orders',
+                //canActivate:[AuthGuard],
+                canLoad:[AuthGuard], 
+                loadChildren:"./orders/order.module#OrderModule"
+            },
             {path:'welcome',component:WelcomeComponent},
             {path:'', redirectTo:'welcome',pathMatch:'full'},
             {path:'**',component:PageNotFoundComponent}
