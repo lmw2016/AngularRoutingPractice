@@ -3,6 +3,7 @@ import { RouterModule } from "@angular/router";
 import { WelcomeComponent } from "./home/welcome.component";
 import { PageNotFoundComponent } from "./page-not-found.component";
 import { AuthGuard } from "./user/auth.guard";
+import { AuthService } from "./user/auth.service";
 
 @NgModule({
     imports:[
@@ -12,7 +13,8 @@ import { AuthGuard } from "./user/auth.guard";
                 path:'products',
                 /*component:ProductListComponent,
                 resolve:{resolvedData:ProductListResolver},*/
-                canActivate:[AuthGuard],
+                //canActivate:[AuthGuard],
+                canLoad:[AuthGuard], 
                 loadChildren:"./products/product.module#ProductModule"
             },
             {path:'welcome',component:WelcomeComponent},
