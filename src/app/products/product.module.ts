@@ -17,12 +17,12 @@ import { ProductEditGuard } from './product-edit/product-edit.guard';
   imports: [
     SharedModule,
     RouterModule.forChild([ //7th video
-      {
-        path:'products',
-        /*component:ProductListComponent,
-        resolve:{resolvedData:ProductListResolver},*/
-        canActivate:[AuthGuard],
-        children:[
+      // {
+      //   path:'products',
+      //   /*component:ProductListComponent,
+      //   resolve:{resolvedData:ProductListResolver},*/
+      //   canActivate:[AuthGuard],
+      //   children:[
           {path:'', 
            component:ProductListComponent,
            resolve:{resolvedData:ProductListResolver}},
@@ -37,8 +37,8 @@ import { ProductEditGuard } from './product-edit/product-edit.guard';
              {path:'',redirectTo:'info',pathMatch:'full'},
              {path:'info',component:ProductEditInfoComponent},
              {path:'tags',component:ProductEditTagsComponent}
-           ]
-         }
+           //]
+         //}
         ]
       }
       
