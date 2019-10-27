@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { RouterModule, PreloadAllModules } from "@angular/router";
 import { WelcomeComponent } from "./home/welcome.component";
 import { PageNotFoundComponent } from "./page-not-found.component";
 import { AuthGuard } from "./user/auth.guard";
@@ -13,15 +13,15 @@ import { AuthService } from "./user/auth.service";
                 path:'products',
                 /*component:ProductListComponent,
                 resolve:{resolvedData:ProductListResolver},*/
-                //canActivate:[AuthGuard],
-                canLoad:[AuthGuard], 
+                canActivate:[AuthGuard],
+                //canLoad:[AuthGuard], 
                 loadChildren:"./products/product.module#ProductModule"
             },
             {path:'welcome',component:WelcomeComponent},
             {path:'', redirectTo:'welcome',pathMatch:'full'},
             {path:'**',component:PageNotFoundComponent}
               //8th video : explicitly declard module are processed lastly!!
-          ],{enableTracing:true}) // no , here
+          ],{enableTracing:true, preloadingStrategy:PreloadAllModules}) // no , here
     ],
     exports:[
         RouterModule
